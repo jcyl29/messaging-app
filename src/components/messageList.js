@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import useApi from '../hooks/useApi'
 import ConsecutiveSnackbars from './demo'
+import priorityMap from '../enums'
 
 const MessageList = () => {
   const [messages, setMessages] = useState([])
 
   const handleMessageCallback = newMsg => {
-    setMessages([...(messages.push(newMsg) && messages)])
+    const result = { ...newMsg, priority: priorityMap[newMsg.priority] }
+    setMessages([...(messages.push(result) && messages)])
   }
 
   const [apiStarted, toggleApiStarted] = useApi(handleMessageCallback)
