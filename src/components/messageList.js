@@ -25,13 +25,15 @@ const MessageList = () => {
       enqueue(newMsg)
     }
 
+    const updatedList =
+      newState[[priority]].push({
+        ...newMsg,
+        id: new Date().toISOString()
+      }) && newState[[priority]]
+
     setState({
       ...newState,
-      [priority]:
-        newState[[priority]].push({
-          ...newMsg,
-          id: new Date().toISOString()
-        }) && newState[[priority]]
+      [priority]: updatedList
     })
   }
 
@@ -79,12 +81,10 @@ const MessageList = () => {
             priority={priority}
             messageList={state[priority]}
             deleteMessage={deleteMessage}
-            width={100/Object.keys(state).length}
+            width={100 / Object.keys(state).length}
           />
         ))}
       </Grid>
-
-      <pre>state {JSON.stringify(state, undefined, 2)}</pre>
       {CustomSnackbar}
     </Grid>
   )

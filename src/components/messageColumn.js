@@ -1,15 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
-
+import React from 'react'
+import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
-import useApi from '../hooks/useApi'
-import ConsecutiveSnackbars from './demo'
-import { priorityColorsMap, priorityMap } from '../enums'
-import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import PropTypes from 'prop-types'
+import { priorityColorsMap } from '../enums'
 
 const MessageColumn = ({ priority, messageList, deleteMessage, width }) => {
   const onDeleteClick = (id, priority) => {

@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import 'typeface-roboto'
 import MessageList from './components/messageList'
-import App from './components/app'
-const NewApp = MessageList
 
 function renderApp(App) {
   ReactDOM.render(<App />, document.getElementById('root'))
