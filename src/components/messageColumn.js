@@ -11,13 +11,13 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import PropTypes from 'prop-types'
 
-const MessageColumn = ({ priority, messageList, deleteMessage }) => {
+const MessageColumn = ({ priority, messageList, deleteMessage, width }) => {
   const onDeleteClick = (id, priority) => {
     deleteMessage(id, priority)
   }
 
   return (
-    <Grid item style={{width: "33.3333%"}}>
+    <Grid item style={{ width: `${width}%` }}>
       <Typography variant="h5" component="h2" gutterBottom>
         {priority} Type 1
       </Typography>
@@ -64,7 +64,8 @@ const MessageColumn = ({ priority, messageList, deleteMessage }) => {
 MessageColumn.propTypes = {
   priority: PropTypes.string.isRequired,
   messageList: PropTypes.array.isRequired,
-  deleteMessage: PropTypes.func.isRequired
+  deleteMessage: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired
 }
 
 export default MessageColumn

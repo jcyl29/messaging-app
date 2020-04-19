@@ -79,6 +79,7 @@ const MessageList = () => {
             priority={priority}
             messageList={state[priority]}
             deleteMessage={deleteMessage}
+            width={100/Object.keys(state).length}
           />
         ))}
       </Grid>
