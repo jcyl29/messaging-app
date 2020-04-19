@@ -1,19 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 
 import Button from '@material-ui/core/Button'
-import useApi from '../hooks/useApi'
-import ConsecutiveSnackbars from './demo'
-import { priorityColorsMap, priorityMap } from '../enums'
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
+import useApi from '../hooks/useApi'
+import useSnackbar from '../hooks/useSnackbar'
+import { priorityMap } from '../enums'
 import MessageColumn from './messageColumn'
-import SnackbarContent from '@material-ui/core/SnackbarContent'
-import IconButton from '@material-ui/core/IconButton'
-import CloseIcon from '@material-ui/icons/Close'
-import Snackbar from '@material-ui/core/Snackbar'
 
 const MessageList = () => {
   const initializeState = () =>
@@ -22,48 +15,13 @@ const MessageList = () => {
       return acc
     }, {})
 
-  const [state, setState] = useState(initializeState())
-  const restartStateRef = useRef(null)
-
-  const queueRef = React.useRef([])
-  const [open, setOpen] = React.useState(false)
-  const [messageInfo, setMessageInfo] = React.useState(undefined)
-
-  const processQueue = () => {
-    if (queueRef.current.length > 0) {
-      setMessageInfo(queueRef.current.shift())
-      setOpen(true)
-    }
-  }
-
-  const enqueue = message => {
-    queueRef.current.push(message)
-
-    if (open) {
-      // immediately begin dismissing current message
-      // to start showing new one
-      setOpen(false)
-    } else {
-      processQueue()
-    }
-  }
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
-    }
-    setOpen(false)
-  }
-
-  const handleExited = () => {
-    processQueue()
-  }
+  const snackBarPriority = 'error'
 
   const handleMessageCallback = newMsg => {
     const priority = priorityMap[newMsg.priority]
     const newState = restartStateRef.current || state
 
-    if (priority === 'error') {
+    if (priority === snackBarPriority) {
       enqueue(newMsg)
     }
 
@@ -90,6 +48,10 @@ const MessageList = () => {
   }
 
   const [apiStarted, toggleApiStarted] = useApi(handleMessageCallback)
+  const [state, setState] = useState(initializeState())
+  const restartStateRef = useRef(null)
+
+  const [enqueue, CustomSnackbar] = useSnackbar({ priority: snackBarPriority })
 
   return (
     <Grid container spacing={2}>
@@ -122,38 +84,7 @@ const MessageList = () => {
       </Grid>
 
       <pre>state {JSON.stringify(state, undefined, 2)}</pre>
-
-      <Snackbar
-        key={messageInfo ? messageInfo.key : undefined}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center'
-        }}
-        open={open}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        onExited={handleExited}
-      >
-        <SnackbarContent
-          style={{
-            backgroundColor: priorityColorsMap['error']
-          }}
-          message={<span id="client-snackbar">{messageInfo && messageInfo.message}</span>}
-          action={
-            <>
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                onClick={handleClose}
-              >
-                <CloseIcon />
-              </IconButton>
-            </>
-          }
-        />
-      </Snackbar>
-
-      <ConsecutiveSnackbars />
+      {CustomSnackbar}
     </Grid>
   )
 }
