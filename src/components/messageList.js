@@ -68,7 +68,7 @@ const MessageList = () => {
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="contained" onClick={clearMessages}>
+            <Button variant="contained" onClick={clearMessages} id="clear-button">
               Clear
             </Button>
           </Grid>

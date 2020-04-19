@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import Api from '../api'
 
-export default (callback) => {
+export default callback => {
   const [apiStarted, toggleApiStarted] = useState(true)
-  const api = useRef(null)
-
-  useEffect(() => {
-    api.current = new Api({
+  const api = useRef(
+    new Api({
       messageCallback: message => {
         callback(message)
       }
     })
+  )
+
+  useEffect(() => {
     api.current.start()
   }, [])
 

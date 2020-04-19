@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import { priorityColorsMap } from '../enums'
+import { capitalizeFirstLetter } from '../utils'
 
 const MessageColumn = ({ priority, messageList, deleteMessage, width }) => {
   const onDeleteClick = (id, priority) => {
@@ -15,7 +16,7 @@ const MessageColumn = ({ priority, messageList, deleteMessage, width }) => {
   return (
     <Grid item style={{ width: `${width}%` }}>
       <Typography variant="h5" component="h2" gutterBottom>
-        {priority} Type 1
+        {capitalizeFirstLetter(priority)} Type 1
       </Typography>
       <Typography variant="subtitle1" component="h3" gutterBottom>
         Count: {messageList.length}
