@@ -6,7 +6,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom"
+    "test": "react-scripts test --env=jsdom",
+    "lint": "eslint .  --ext .js"
   },
   "author": "Help.com",
   "license": "No license",
@@ -15,7 +16,6 @@
     "@material-ui/icons": "^4.9.1",
     "chance": "^0.8.0",
     "lodash": "^4.17.2",
-    "prop-types": "^15.5.8",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.0.1",

@@ -8,10 +8,10 @@ function renderApp(App) {
   ReactDOM.render(<App />, document.getElementById('root'))
 }
 
-renderApp(App)
+renderApp(MessageList)
 
 if (module.hot) {
   module.hot.accept('./components/messageList', () => {
-    renderApp(App)
+    renderApp(MessageList)
   })
 }
