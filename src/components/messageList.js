@@ -40,6 +40,12 @@ const MessageList = () => {
     restartStateRef.current = initializeState()
   }
 
+  const deleteMessage = (id, priority) => {
+    const messageIndex = state[priority].findIndex(data => data.id === id)
+    const updatedList = state[priority].splice(messageIndex, 1) && state[priority]
+    setState({ ...state, [priority]: updatedList })
+  }
+
   const [apiStarted, toggleApiStarted] = useApi(handleMessageCallback)
 
   return (
@@ -67,6 +73,7 @@ const MessageList = () => {
             key={index}
             priority={priority}
             messageList={state[priority]}
+            deleteMessage={deleteMessage}
           />
         ))}
       </Grid>
