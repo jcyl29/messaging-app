@@ -1,10 +1,11 @@
 import React from 'react'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
-import { priorityColorsMap } from '../enums'
-import { capitalizeFirstLetter } from '../utils'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Snackbar from '@material-ui/core/Snackbar'
+import { priorityColorsMap } from '../enums'
+import { capitalizeFirstLetter } from '../utils'
+
 
 export default ({ priority }) => {
   const queueRef = React.useRef([])
