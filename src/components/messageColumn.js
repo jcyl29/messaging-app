@@ -17,7 +17,7 @@ const MessageColumn = ({ priority, messageList, deleteMessage }) => {
   }
 
   return (
-    <Grid item>
+    <Grid item style={{width: "33.3333%"}}>
       <Typography variant="h5" component="h2" gutterBottom>
         {priority} Type 1
       </Typography>
@@ -41,7 +41,6 @@ const MessageColumn = ({ priority, messageList, deleteMessage }) => {
                 >
                   <Grid item>
                     <Typography color="textPrimary">{data.message}</Typography>
-                    <Typography color="textPrimary">{data.id}</Typography>
                   </Grid>
                   <Grid item>
                     <Button
