@@ -4,4 +4,10 @@ const priorityMap = Object.freeze({
   3: 'info'
 })
 
-export default priorityMap
+const priorityColorsMap = Object.freeze({
+  error: '#F56236',
+  warning: '#FCE788',
+  info: '#88FCA3'
+})
+
+export { priorityMap, priorityColorsMap }

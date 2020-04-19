@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import useApi from '../hooks/useApi'
 import ConsecutiveSnackbars from './demo'
-import priorityMap from '../enums'
+import { priorityMap } from '../enums'
 
 const MessageList = () => {
   const initializeState = () =>
