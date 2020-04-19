@@ -44,7 +44,7 @@ const MessageList = () => {
 
   return (
     <Grid container spacing={2}>
-      <Box mb={2} m="auto">
+      <Box mb={2} m="auto" mt={6}>
         <Grid container justify="center" spacing={2}>
           <Grid item>
             <Button
