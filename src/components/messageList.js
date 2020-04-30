@@ -7,15 +7,14 @@ import useApi from '../hooks/useApi'
 import useSnackbar from '../hooks/useSnackbar'
 import { priorityMap } from '../enums'
 import MessageColumn from './messageColumn'
+import PropTypes from 'prop-types'
 
-const MessageList = () => {
+const MessageList = ({ snackBarPriority }) => {
   const initializeState = () =>
     Object.values(priorityMap).reduce((acc, value) => {
       acc[value] = []
       return acc
     }, {})
-
-  const snackBarPriority = 'error'
 
   const handleMessageCallback = newMsg => {
     const priority = priorityMap[newMsg.priority]
@@ -26,10 +25,10 @@ const MessageList = () => {
     }
 
     const updatedList =
-      newState[[priority]].push({
+      newState[priority].push({
         ...newMsg,
         id: new Date().toISOString()
-      }) && newState[[priority]]
+      }) && newState[priority]
 
     setState({
       ...newState,
@@ -68,7 +67,11 @@ const MessageList = () => {
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="contained" onClick={clearMessages} id="clear-button">
+            <Button
+              variant="contained"
+              onClick={clearMessages}
+              id="clear-button"
+            >
               Clear
             </Button>
           </Grid>
@@ -88,6 +91,14 @@ const MessageList = () => {
       {CustomSnackbar}
     </Grid>
   )
+}
+
+MessageList.propTypes = {
+  snackBarPriority: PropTypes.oneOf(Object.values(priorityMap))
+}
+
+MessageList.defaultProps = {
+  snackBarPriority: 'error'
 }
 
 export default MessageList
